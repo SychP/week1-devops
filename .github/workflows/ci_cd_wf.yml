@@ -21,12 +21,10 @@ jobs:
         run: |
           python -m pip install -r requirements.txt
           python -m pip install pytest-cov
-      - name: Run tests with coverage
+      - name: Build coverage file
         run: >
-          pytest --cov-report=term-missing:skip-covered --cov=app tests/ | tee
-          pytest-coverage.txt
-
-          pytest --junitxml=pytest.xml
+          pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered
+          --cov=app tests/ | tee pytest-coverage.txt
       - name: Run tests
         run: |
           python -m pytest -v tests
